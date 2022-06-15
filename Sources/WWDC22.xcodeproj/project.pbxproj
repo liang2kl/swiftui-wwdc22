@@ -54,7 +54,7 @@
 		0EED344E285A21570036C86F /* WWDC22 */ = {
 			isa = PBXGroup;
 			children = (
-				0EED3466285A21EA0036C86F /* Laytout */,
+				0EED3466285A21EA0036C86F /* Layout */,
 				0EED3465285A21E20036C86F /* Charts */,
 				0EED3464285A21DA0036C86F /* Navigation */,
 				0EED344F285A21570036C86F /* WWDC22App.swift */,
@@ -87,13 +87,13 @@
 			path = Charts;
 			sourceTree = "<group>";
 		};
-		0EED3466285A21EA0036C86F /* Laytout */ = {
+		0EED3466285A21EA0036C86F /* Layout */ = {
 			isa = PBXGroup;
 			children = (
 				0EED3462285A21CD0036C86F /* EqualWidthHStack.swift */,
 				0EED3467285A26EF0036C86F /* WaterfallLayout.swift */,
 			);
-			path = Laytout;
+			path = Layout;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
