@@ -25,6 +25,8 @@ This project aims to cover most of the new APIs of the features mentioned above 
 
 ## Usage
 
+Xcode 14.0 beta (14A5228q) is required to build the project.
+
 To see how the UI looks, you can either run the app and select the demos
 listed on the sidebar, or see each individually with Xcode Previews.
 
