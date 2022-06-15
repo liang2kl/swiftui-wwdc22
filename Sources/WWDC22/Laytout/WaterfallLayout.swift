@@ -90,32 +90,51 @@ struct WaterfallLayout: Layout {
 
 
 struct WaterfallLayout_Previews: PreviewProvider {
-    @Environment(\.openURL) static var openURL
-    @State static var randomHeights = (0..<100).map { _ in Int.random(in: 20...200) }
-
     static var previews: some View {
-        ScrollView {
-            WaterfallLayout(column: 3, spacing: 0).callAsFunction {
-                ForEach(0..<100) { index in
-                    let height = randomHeights[index]
-                    Rectangle()
-                        .stroke()
-                        .foregroundColor(.orange)
-                        .overlay {
-                            Text("**\(index)**: \(height)")
-                        }
-                        .frame(idealHeight: CGFloat(height), maxHeight: CGFloat(height))
+        Preview()
+    }
+    
+    struct Preview: View {
+        @Environment(\.openURL) var openURL
+        @State var randomHeights = Self.generateRandomHeights()
+
+        var body: some View {
+            ScrollView {
+                WaterfallLayout(column: 3, spacing: 0).callAsFunction {
+                    ForEach(0..<100) { index in
+                        let height = randomHeights[index]
+                        Rectangle()
+                            .stroke()
+                            .foregroundColor(.orange)
+                            .overlay {
+                                Text("**\(index)**: \(height)")
+                            }
+                            .frame(idealHeight: CGFloat(height), maxHeight: CGFloat(height))
+                    }
+                    
                 }
-                
+                .padding()
             }
-            .padding()
+            .toolbar {
+                Button {
+                    withAnimation {
+                        randomHeights = Self.generateRandomHeights()
+                    }
+                } label: {
+                    Text("Randomize")
+                }
+                Button {
+                    openURL(URL(string: "https://developer.apple.com/videos/play/wwdc2022/10056/")!)
+                } label: {
+                    Image(systemName: "link")
+                }
+
+            }
         }
-        .toolbar {
-            Button {
-                openURL(URL(string: "https://developer.apple.com/videos/play/wwdc2022/10056/")!)
-            } label: {
-                Image(systemName: "link")
-            }
+        
+        private static func generateRandomHeights() -> [Int] {
+            (0..<100).map { _ in Int.random(in: 20...200) }
         }
     }
+
 }
