@@ -8,18 +8,20 @@
 
 /* Begin PBXBuildFile section */
 		0EED3450285A21570036C86F /* WWDC22App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EED344F285A21570036C86F /* WWDC22App.swift */; };
-		0EED3452285A21570036C86F /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EED3451285A21570036C86F /* ContentView.swift */; };
 		0EED3454285A21590036C86F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0EED3453285A21590036C86F /* Assets.xcassets */; };
 		0EED3458285A21590036C86F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0EED3457285A21590036C86F /* Preview Assets.xcassets */; };
+		0EED3463285A21CD0036C86F /* EqualWidthHStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EED3462285A21CD0036C86F /* EqualWidthHStack.swift */; };
+		0EED3468285A26EF0036C86F /* WaterfallLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EED3467285A26EF0036C86F /* WaterfallLayout.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		0EED344C285A21570036C86F /* WWDC22.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WWDC22.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0EED344F285A21570036C86F /* WWDC22App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WWDC22App.swift; sourceTree = "<group>"; };
-		0EED3451285A21570036C86F /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		0EED3453285A21590036C86F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0EED3455285A21590036C86F /* WWDC22.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = WWDC22.entitlements; sourceTree = "<group>"; };
 		0EED3457285A21590036C86F /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		0EED3462285A21CD0036C86F /* EqualWidthHStack.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EqualWidthHStack.swift; sourceTree = "<group>"; };
+		0EED3467285A26EF0036C86F /* WaterfallLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WaterfallLayout.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,8 +54,10 @@
 		0EED344E285A21570036C86F /* WWDC22 */ = {
 			isa = PBXGroup;
 			children = (
+				0EED3466285A21EA0036C86F /* Laytout */,
+				0EED3465285A21E20036C86F /* Charts */,
+				0EED3464285A21DA0036C86F /* Navigation */,
 				0EED344F285A21570036C86F /* WWDC22App.swift */,
-				0EED3451285A21570036C86F /* ContentView.swift */,
 				0EED3453285A21590036C86F /* Assets.xcassets */,
 				0EED3455285A21590036C86F /* WWDC22.entitlements */,
 				0EED3456285A21590036C86F /* Preview Content */,
@@ -67,6 +71,29 @@
 				0EED3457285A21590036C86F /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		0EED3464285A21DA0036C86F /* Navigation */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Navigation;
+			sourceTree = "<group>";
+		};
+		0EED3465285A21E20036C86F /* Charts */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Charts;
+			sourceTree = "<group>";
+		};
+		0EED3466285A21EA0036C86F /* Laytout */ = {
+			isa = PBXGroup;
+			children = (
+				0EED3462285A21CD0036C86F /* EqualWidthHStack.swift */,
+				0EED3467285A26EF0036C86F /* WaterfallLayout.swift */,
+			);
+			path = Laytout;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -139,8 +166,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0EED3452285A21570036C86F /* ContentView.swift in Sources */,
+				0EED3463285A21CD0036C86F /* EqualWidthHStack.swift in Sources */,
 				0EED3450285A21570036C86F /* WWDC22App.swift in Sources */,
+				0EED3468285A26EF0036C86F /* WaterfallLayout.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
