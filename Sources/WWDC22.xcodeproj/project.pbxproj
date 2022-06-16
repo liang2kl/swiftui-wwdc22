@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0E07F870285ADC4F0046A593 /* InteractiveWeatherChart.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E07F86F285ADC4F0046A593 /* InteractiveWeatherChart.swift */; };
 		0EED3450285A21570036C86F /* WWDC22App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EED344F285A21570036C86F /* WWDC22App.swift */; };
 		0EED3454285A21590036C86F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0EED3453285A21590036C86F /* Assets.xcassets */; };
 		0EED3458285A21590036C86F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0EED3457285A21590036C86F /* Preview Assets.xcassets */; };
@@ -15,6 +16,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0E07F86F285ADC4F0046A593 /* InteractiveWeatherChart.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InteractiveWeatherChart.swift; sourceTree = "<group>"; };
 		0EED344C285A21570036C86F /* WWDC22.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WWDC22.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0EED344F285A21570036C86F /* WWDC22App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WWDC22App.swift; sourceTree = "<group>"; };
 		0EED3453285A21590036C86F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -83,6 +85,7 @@
 		0EED3465285A21E20036C86F /* Charts */ = {
 			isa = PBXGroup;
 			children = (
+				0E07F86F285ADC4F0046A593 /* InteractiveWeatherChart.swift */,
 			);
 			path = Charts;
 			sourceTree = "<group>";
@@ -167,6 +170,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0EED3463285A21CD0036C86F /* EqualWidthHStack.swift in Sources */,
+				0E07F870285ADC4F0046A593 /* InteractiveWeatherChart.swift in Sources */,
 				0EED3450285A21570036C86F /* WWDC22App.swift in Sources */,
 				0EED3468285A26EF0036C86F /* WaterfallLayout.swift in Sources */,
 			);

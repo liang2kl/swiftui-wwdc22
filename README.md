@@ -10,7 +10,7 @@ this year include:
 - [x] Custom layouts (multi-platform)
 - [ ] `Grid` (multi-platform)
 - [ ] New navigation APIs (multi-platform)
-- [ ] Swift Charts framework (multi-platform)
+- [x] Swift Charts framework (multi-platform)
 - [ ] New feature of `TextField` (multi-platform)
 - [ ] `Table` (on iPad)
 - [ ] Desktop-class toolbar (on iPad)
@@ -26,7 +26,7 @@ This project aims to cover most of the new APIs of the features mentioned above 
 | Topic | Demos |
 | :--:  | :--:  |
 | Layout | [WaterfallLayout](Sources/WWDC22/Layout/WaterfallLayout.swift)<br/>[EqualWidthHStack](Sources/WWDC22/Layout/EqualWidthHStack.swift) |
-| Charts | |
+| Charts | [InteractiveWeatherChart](Sources/WWDC22/Charts/InteractiveWeatherChart.swift) |
 | Navigation | |
 
 ![](Assets/screenshot.png)
