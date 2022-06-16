@@ -9,18 +9,23 @@ import SwiftUI
 
 @main
 struct WWDC22App: App {
-    @State var selectedDemo: DemoType = .waterfall
+    @State var selectedDemo: DemoType?
     
     var body: some Scene {
         WindowGroup {
             NavigationSplitView {
                 List(DemoType.allCases, selection: $selectedDemo) { demoType in
-                    // FIXME: There is (possibly) a bug with NavigationLink which will prompt with a runtime warning
                     NavigationLink(demoType.description, value: demoType)
                 }
+                // FIXME: There is a bug with NavigationLink destination
                 .navigationDestination(for: DemoType.self) { $0.preview }
+                .navigationTitle("WWDC22")
             } detail: {
-                selectedDemo.preview
+                if let selectedDemo = selectedDemo {
+                    selectedDemo.preview
+                } else {
+                    Text("Select a demo from the sidebar.")
+                }
             }
         }
     }

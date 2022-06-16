@@ -21,6 +21,14 @@ this year include:
 
 This project aims to cover most of the new APIs of the features mentioned above with a set of tiny demos.
 
+## Demos
+
+| Topic | Demos |
+| :--:  | :--:  |
+| Layout | [WaterfallLayout](Sources/WWDC22/Layout/WaterfallLayout.swift)<br/>[EqualWidthHStack](Sources/WWDC22/Layout/EqualWidthHStack.swift) |
+| Charts | |
+| Navigation | |
+
 ![](Assets/screenshot.png)
 
 ## Usage
@@ -38,7 +46,8 @@ Contributions are welcome to make new demos of the uncovered topics (listed as n
 
 If you are to make a new demo, make sure to:
 
-- Document it in detail,
 - Put the new source file into a (existing or newly created) group,
-- Create a preview in the source file, and
-- Make an entry in the split view using the static preview.
+- Create a preview in the source file
+- Document it in detail,
+- Make an entry in the split view using the static preview, and
+- Update the README.

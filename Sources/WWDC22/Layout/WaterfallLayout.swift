@@ -11,21 +11,29 @@ import SwiftUI
 /// a column with minimum height.
 struct WaterfallLayout: Layout {
     var column: Int = 2
-    var spacing: CGFloat = 10
+    var spacing: CGFloat = 0
+    
+    typealias CacheData = (origins: [CGPoint], columnWidth: CGFloat, height: CGFloat)
     
     func calculateGeometry(
         subviews: Subviews,
         proposal: ProposedViewSize
-    ) -> (origins: [CGPoint], width: CGFloat, height: CGFloat) {
+    ) -> CacheData {
         guard let width = proposal.width, !subviews.isEmpty else {
-            return (origins: [], width: 0, height: 0)
+            return (origins: [], columnWidth: 0, height: 0)
         }
+        
+        // Calculate width and leading x coordinate for each column.
         let columnWidth = (width - CGFloat(column - 1) * spacing) / CGFloat(column)
         let columnX = (0..<column).map { columnIndex in
             CGFloat(columnIndex) * (columnWidth + spacing)
         }
+        
+        /// Stores currently allocated height for each column.
         var currentHeight = [CGFloat](repeating: 0, count: column)
+        /// Stores the returned origins for each subview.
         var origins = [CGPoint]()
+        /// Tracks the height of the heighest column.
         var maxHeight: CGFloat = -1;
         
         for index in subviews.indices {
@@ -47,39 +55,51 @@ struct WaterfallLayout: Layout {
             maxHeight = max(currentHeight[selectedColumn], maxHeight)
         }
         
-        return (origins: origins, width: columnWidth, height: maxHeight)
+        return (origins: origins, columnWidth: columnWidth, height: maxHeight)
+    }
+    
+    func makeCache(subviews: Subviews) -> CacheData? {
+        // As the cached data rely on view size proposal of the layout
+        // and we cannot obtain that in `makeCache`, so we just clear
+        // previous cache here.
+        return nil
     }
 
     func sizeThatFits(
         proposal: ProposedViewSize,
         subviews: Subviews,
-        cache: inout ()
+        cache: inout CacheData?
     ) -> CGSize {
-        let (origins, _, maxHeight) = calculateGeometry(
+        let cacheData = calculateGeometry(
             subviews: subviews, proposal: proposal
         )
-        guard !origins.isEmpty else { return CGSize() }
-        return CGSize(width: proposal.width ?? 0, height: maxHeight)
+        
+        // Set cache (to be used in `placeSubviews()`).
+        cache = cacheData
+
+        guard !cacheData.origins.isEmpty else { return CGSize() }
+        
+        return CGSize(width: proposal.width ?? 0, height: cacheData.height)
     }
 
     func placeSubviews(
         in bounds: CGRect,
         proposal: ProposedViewSize,
         subviews: Subviews,
-        cache: inout ()
+        cache: inout CacheData?
     ) {
-        let (origins, columnWidth, _) = calculateGeometry(
-            subviews: subviews, proposal: proposal
-        )
+        // Obtain cached data set by `sizeThatFits` so that we don't need to
+        // re-calculate the geometry.
+        let cacheData = cache ?? calculateGeometry(subviews: subviews, proposal: proposal)
         
-        let placementProposal = ProposedViewSize(width: columnWidth, height: nil)
+        let placementProposal = ProposedViewSize(width: cacheData.columnWidth, height: nil)
         
         for index in subviews.indices {
             subviews[index].place(
                 at: CGPoint(
                     // Be careful here: the bounds's origin is not always (0, 0)!
-                    x: bounds.minX + origins[index].x,
-                    y: bounds.minY + origins[index].y
+                    x: bounds.minX + cacheData.origins[index].x,
+                    y: bounds.minY + cacheData.origins[index].y
                 ),
                 anchor: .topLeading,
                 proposal: placementProposal
@@ -97,31 +117,37 @@ struct WaterfallLayout_Previews: PreviewProvider {
     struct Preview: View {
         @Environment(\.openURL) var openURL
         @State var randomHeights = Self.generateRandomHeights()
+        @State var numberOfColumns = 3
 
         var body: some View {
             ScrollView {
-                WaterfallLayout(column: 3, spacing: 0).callAsFunction {
+                WaterfallLayout(column: numberOfColumns).callAsFunction {
                     ForEach(0..<100) { index in
                         let height = randomHeights[index]
-                        Rectangle()
-                            .stroke()
-                            .foregroundColor(.orange)
-                            .overlay {
-                                Text("**\(index)**: \(height)")
-                            }
-                            .frame(idealHeight: CGFloat(height), maxHeight: CGFloat(height))
+                        ZStack {
+                            Rectangle()
+                                .stroke()
+                                .foregroundColor(.orange)
+                            Text("**\(index)**")
+                        }
+                        .frame(height: CGFloat(height))
                     }
-                    
                 }
                 .padding()
+                .animation(.default, value: numberOfColumns)
+                .animation(.default, value: randomHeights)
             }
             .toolbar {
-                Button {
-                    withAnimation {
-                        randomHeights = Self.generateRandomHeights()
+                Picker("Column Number", selection: $numberOfColumns) {
+                    ForEach(1..<6) { columns in
+                        Text("\(columns)")
+                            .tag(columns)
                     }
-                } label: {
-                    Text("Randomize")
+                }
+                .pickerStyle(.menu)
+                
+                Button("Randomize") {
+                    randomHeights = Self.generateRandomHeights()
                 }
                 Button {
                     openURL(URL(string: "https://developer.apple.com/videos/play/wwdc2022/10056/")!)
@@ -130,6 +156,7 @@ struct WaterfallLayout_Previews: PreviewProvider {
                 }
 
             }
+            .navigationTitle("Waterfall Layout")
         }
         
         private static func generateRandomHeights() -> [Int] {
