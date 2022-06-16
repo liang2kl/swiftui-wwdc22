@@ -13,6 +13,7 @@ import Charts
 /// like those charts in the new Weather app.
 struct InteractiveWeatherChart: View {
     var datas: [WeatherData]
+    var currentTime: Int = 10
     @State private var selectedTime: Int?
     @State private var isPressing = false
     
@@ -46,12 +47,38 @@ struct InteractiveWeatherChart: View {
                 .foregroundStyle(gradient)
                 .lineStyle(StrokeStyle(lineWidth: 5))
             }
+            
+            // Indication of current time
+            if currentTime > 0 {
+                // Fade out the passed time.
+                RectangleMark(
+                    xStart: .value("Range start", 0),
+                    xEnd: .value("Range end", currentTime)
+                )
+                .foregroundStyle(.black)
+                .opacity(0.2)
+                
+                RuleMark(
+                    x: .value("Current time", currentTime)
+                )
+                .foregroundStyle(Color.secondary.opacity(0.7))
+                .lineStyle(StrokeStyle(lineWidth: 1))
+
+            }
 
             // Show the rule and the point when user interacts with the chart.
             if let selectedTime = selectedTime, selectedTime >= 0, selectedTime <= 24 {
                 let data = datas[selectedTime]
                 RuleMark(x: .value("Selected Time", selectedTime))
                     .foregroundStyle(Color.secondary)
+                    .annotation(
+                        position: selectedTime <= 12 ? .trailing : .leading,
+                        alignment: .top
+                    ) {
+                        Label("\(data.temperature)°", systemImage: data.weather.symbolName)
+                            .font(.system(.title, weight: .medium))
+                            .padding()
+                    }
                 PointMark(
                     x: .value("Selected Time", selectedTime),
                     y: .value("Selected Tempeature", data.temperature)
@@ -107,14 +134,9 @@ struct InteractiveWeatherChart: View {
                         }
                     )
                 
-                    // Display the weather of the selected time.
+                    // Display the tips.
                     .overlay(alignment: .topLeading) {
-                        if let selectedTime = selectedTime, selectedTime >= 0, selectedTime <= 24 {
-                            let data = datas[selectedTime]
-                            Label(String(data.temperature), systemImage: data.weather.symbolName)
-                                .font(.system(.title, weight: .medium))
-                                .padding()
-                        } else {
+                        if selectedTime == nil {
                             Text("Hover or press to get detail weather of specific time")
                                 .font(.system(.body, weight: .medium))
                                 .frame(maxWidth: 120)
@@ -158,6 +180,7 @@ struct InteractiveWeatherChart: View {
             self.selectedTime = lround(selectedTime)
         }
     }
+
 }
 
 // MARK: - Models

@@ -9,7 +9,7 @@ import SwiftUI
 
 @main
 struct WWDC22App: App {
-    @State var selectedDemo: DemoType? = .interactiveChart
+    @State var selectedDemo: DemoType?
     
     var body: some Scene {
         WindowGroup {
