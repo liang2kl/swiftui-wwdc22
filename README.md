@@ -7,7 +7,7 @@ Here we will explore (hopefully) most new APIs for SwiftUI in macOS 13 and iOS 1
 As introduced in [What's new in SwiftUI](https://developer.apple.com/videos/play/wwdc2022/10052/), the major updates to SwiftUI
 this year include:
 
-- [x] Custom layouts (multi-platform) [2 demos]
+- [x] Custom layouts (multi-platform)
 - [ ] `Grid` (multi-platform)
 - [ ] New navigation APIs (multi-platform)
 - [ ] Swift Charts framework (multi-platform)
